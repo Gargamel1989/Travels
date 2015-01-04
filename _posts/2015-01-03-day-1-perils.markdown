@@ -1,0 +1,16 @@
+---
+layout:     post
+title:      "Day 1 perils"
+subtitle:   "Finding my limits on departure day"
+date:       2015-01-04 22:48:00
+author:     "Joep"
+header-img: "img/day-1.jpg"
+---
+
+<p>
+	Yes, I ate that.
+</p>
+
+<p>
+	I'm tired now, goodnight.
+</p>

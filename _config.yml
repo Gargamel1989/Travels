@@ -1,13 +1,11 @@
 # Site settings
-title: Clean Blog
-header-img: img/home-bg.jpg
-email: your-email@yourdomain.com
-description: "Write your site description here. It will be used as your sites meta description as well!"
+title: Pictures and spelling errors
+header-img: img/Maasvallei1.jpg
+email: joep.driesen@seasoning.be
+description: "Writing about my travels"
 baseurl: "/Travels"
 url: "http://www.joep.tk"
-twitter_username: SBootstrap
-github_username:  davidtmiller
-facebook_username:  IronSummitMedia
+github_username:  Gargamel1989
 
 # Build settings
 markdown: kramdown

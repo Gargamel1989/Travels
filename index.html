@@ -3,6 +3,14 @@ layout: page
 description: "Travelling through Europe by foot, bike and train"
 ---
 
+<iframe 
+	src="https://www.google.com/maps/d/embed?mid=zei809Kzp4AE.kiij-EkcYJog"
+	style="border: none; width: 100%; height: 400px;"></iframe>
+<span class="caption text-muted">
+	Dark Colors: Hiking/biking - Light Colors: Train
+</span>
+
+
 {% for post in paginator.posts %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
@@ -34,3 +42,80 @@ description: "Travelling through Europe by foot, bike and train"
     {% endif %}
 </ul>
 {% endif %}
+
+<script type="text/javascript" src="{{ site.baseurl }}/assets/finance.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+	function de_tooltip(date, de) {
+		return '<div style="margin:5px;"><b>' + date + '</b><br /><br /><span style="white-space:nowrap;">Money spent: € ' + Math.round(de*100)/100 + '</span></div>';
+	}
+	function be_tooltip(date, be) {
+		return '<div style="margin:5px;"><b>' + date + '</b><br /><br /><span style="white-space:nowrap;">Budgetted total: € ' + Math.round(be*100)/100 + '</span></div>';
+	}
+	function bd_tooltip(date, te, bd) {
+		return '<div style="margin:5px;"><b>' + date + '</b><br /><br /><span style="white-space:nowrap;">Total money spent: € ' + Math.round(te*100)/100 + '</span><br /><span style="white-space:nowrap;">Deviation from Budget: € ' + Math.round(bd*100)/100 + '</span></div>';
+	}
+	
+	var dataArray = [['Day', 
+	                  'Daily Expenditure', {'role': 'tooltip', 'p': {'html': true}}, 
+	                  'Budgetted Total Expenditure (Normalized)', {'role': 'tooltip', 'p': {'html': true}}, 
+	                  'Deviation from Budget', {'role': 'tooltip', 'p': {'html': true}}]]
+	
+	var date = null;
+	var exp = 0;
+	
+	var budget_tot = 0;
+	var real_tot = 0;
+	
+	for (var i=0;i<finances.length;i++) {
+		f = finances[i];
+		
+		if (!date) {
+			date = f[0];
+		} else if (date != f[0]) {
+			budget_tot = budget_tot + 15;
+			real_tot = real_tot + exp;
+			dataArray.push([date, 
+			                exp, de_tooltip(date, exp), 
+			                15, be_tooltip(date, budget_tot), 
+			                real_tot - budget_tot, bd_tooltip(date, real_tot, real_tot - budget_tot)]);
+			exp = 0;
+			date = f[0];
+		}
+		
+		exp = exp + f[2]
+	}
+	
+	
+    google.load("visualization", "1", {packages:["corechart"]});
+	google.setOnLoadCallback(drawVisualization);
+
+	function drawVisualization() {
+	  // Some raw data (not necessarily accurate)
+	  var data = google.visualization.arrayToDataTable(dataArray);
+	
+	  var options = {
+	    title : 'Financial status over time',
+	    vAxis: {title: "Expenditures"},
+	    hAxis: {title: "Time"},
+	    seriesType: "bars",
+	    series: {1: {type: "line"},
+	    		 2: {type: "line"}},
+		legend: {position: 'bottom'},
+	    tooltip: {isHtml: true},
+		bar: {groupWidth: '99%'}
+
+	  };
+	
+	  var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+	  chart.draw(data, options);
+	}
+</script>
+
+<br /><br />
+<h3>Finances</h3>
+<p>
+	I will be using this graph to keep track of my finances and as a daily reminder of how bad I am at planning
+</p>
+<div id="chart_div"></div>

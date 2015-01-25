@@ -43,6 +43,14 @@ description: "Travelling through Europe by foot, bike and train"
 </ul>
 {% endif %}
 
+<br /><br />
+<h3>Finances</h3>
+<p>
+	I will be using this graph to keep track of my finances and as a daily reminder of how bad I am at planning
+</p>
+<div id="chart_div"></div>
+
+
 <script type="text/javascript" src="{{ site.baseurl }}/assets/finance.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
@@ -53,8 +61,8 @@ description: "Travelling through Europe by foot, bike and train"
 	function be_tooltip(date, be) {
 		return '<div style="margin:5px;"><b>' + date + '</b><br /><br /><span style="white-space:nowrap;">Budgetted total: € ' + Math.round(be*100)/100 + '</span></div>';
 	}
-	function bd_tooltip(date, te, bd) {
-		return '<div style="margin:5px;"><b>' + date + '</b><br /><br /><span style="white-space:nowrap;">Total money spent: € ' + Math.round(te*100)/100 + '</span><br /><span style="white-space:nowrap;">Deviation from Budget: € ' + Math.round(bd*100)/100 + '</span></div>';
+	function bd_tooltip(days, date, te, bd, de) {
+		return '<div style="margin:5px;"><b>' + date + ' (day ' + days + ')</b><br /><br /><span style="white-space:nowrap;">Total money spent: € ' + Math.round(te*100)/100 + '</span><br /><span style="white-space:nowrap;">Deviation from Budget: € ' + Math.round(bd*100)/100 + '</span><br /><span style="white-space:nowrap;">Actual daily expenditure: € ' + Math.round(de*100)/100 + '</span></div>';
 	}
 	
 	var dataArray = [['Day', 
@@ -64,6 +72,7 @@ description: "Travelling through Europe by foot, bike and train"
 	
 	var date = null;
 	var exp = 0;
+	var days = 0;
 	
 	var budget_tot = 0;
 	var real_tot = 0;
@@ -74,18 +83,31 @@ description: "Travelling through Europe by foot, bike and train"
 		if (!date) {
 			date = f[0];
 		} else if (date != f[0]) {
+
+			days++;
+			
 			budget_tot = budget_tot + 15;
 			real_tot = real_tot + exp;
 			dataArray.push([date, 
 			                exp, de_tooltip(date, exp), 
 			                15, be_tooltip(date, budget_tot), 
-			                real_tot - budget_tot, bd_tooltip(date, real_tot, real_tot - budget_tot)]);
+			                real_tot - budget_tot, bd_tooltip(days, date, real_tot, real_tot - budget_tot, real_tot/days)]);
 			exp = 0;
 			date = f[0];
 		}
 		
 		exp = exp + f[2]
 	}
+
+	days++;
+	
+	budget_tot = budget_tot + 15;
+	real_tot = real_tot + exp;
+	dataArray.push([date, 
+	                exp, de_tooltip(date, exp), 
+	                15, be_tooltip(date, budget_tot), 
+	                real_tot - budget_tot, bd_tooltip(days, date, real_tot, real_tot - budget_tot, real_tot/days)]);
+	
 	
 	
     google.load("visualization", "1", {packages:["corechart"]});
@@ -109,13 +131,7 @@ description: "Travelling through Europe by foot, bike and train"
 	  };
 	
 	  var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+	  
 	  chart.draw(data, options);
 	}
 </script>
-
-<br /><br />
-<h3>Finances</h3>
-<p>
-	I will be using this graph to keep track of my finances and as a daily reminder of how bad I am at planning
-</p>
-<div id="chart_div"></div>

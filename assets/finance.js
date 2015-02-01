@@ -37,11 +37,16 @@ var finances = [
 ["20/01/2015","Food",15.97],
 ["21/01/2015","Camping in La Chapelle La Reine", 15],
 ["22/01/2015","Camping in La Chapelle La Reine", 15],
+["22/01/2015","Food",16],
 ["23/01/2015","Camping in La Chapelle La Reine", 15],
-["23/01/2015","Food",14.3],
+["23/01/2015","Bike repairs/File"],
 ["24/01/2015","Camping in La Chapelle La Reine", 15],
 ["24/01/2015","Renting a crashpad", 4],
 ["25/01/2015","Camping in La Chapelle La Reine", 15],
-
-
+["26/01/2015","Food",6.28],
+["26/01/2015","Sent climbing gear home",18],
+["27/01/2015","Beer",1.8],
+["27/01/2015","Hostel Cenoy",15.6],
+["28/01/2015","Hostel Cenoy",15.6],
+["28/01/2015","Food",9.04],
 ]

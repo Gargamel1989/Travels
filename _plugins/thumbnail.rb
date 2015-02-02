@@ -16,6 +16,5 @@ class Jekyll::ImagePreview < Liquid::Tag
 end
 
 
-
 Liquid::Template.register_tag('preview',   Jekyll::ImagePreview)
 

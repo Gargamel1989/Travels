@@ -67,7 +67,7 @@ description: "Travelling through Europe by foot, bike and train"
 	
 	var dataArray = [['Day', 
 	                  'Daily Expenditure', {'role': 'tooltip', 'p': {'html': true}}, 
-	                  'Budgetted Total Expenditure (Normalized)', {'role': 'tooltip', 'p': {'html': true}}, 
+	                  /* 'Budgetted Total Expenditure (Normalized)', {'role': 'tooltip', 'p': {'html': true}},  */
 	                  'Deviation from Budget', {'role': 'tooltip', 'p': {'html': true}}]]
 	
 	var date = null;
@@ -90,7 +90,7 @@ description: "Travelling through Europe by foot, bike and train"
 			real_tot = real_tot + exp;
 			dataArray.push([date, 
 			                exp, de_tooltip(date, exp), 
-			                15, be_tooltip(date, budget_tot), 
+			                /* 15, be_tooltip(date, budget_tot), */ 
 			                real_tot - budget_tot, bd_tooltip(days, date, real_tot, real_tot - budget_tot, real_tot/days)]);
 			exp = 0;
 			date = f[0];
@@ -105,7 +105,7 @@ description: "Travelling through Europe by foot, bike and train"
 	real_tot = real_tot + exp;
 	dataArray.push([date, 
 	                exp, de_tooltip(date, exp), 
-	                15, be_tooltip(date, budget_tot), 
+	                /* 15, be_tooltip(date, budget_tot),  */
 	                real_tot - budget_tot, bd_tooltip(days, date, real_tot, real_tot - budget_tot, real_tot/days)]);
 	
 	

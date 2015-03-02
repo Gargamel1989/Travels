@@ -91,4 +91,12 @@ var finances = [
 ["24/02/2015","Danois Long Island Ice Tea",8.5],
 ["24/02/2015","House party police bribe",10],
 ["25/02/2015","No Expenses",0],
+["26/02/2015","?",20],
+["27/02/2015","?",0],
+["28/02/2015","Pastries",2.8],
+["28/02/2015","Blue Note Rugby",20]
+["01/03/2015","Beers Blue Note",11],
+["02/03/2015","Gin-Tonic Danois",11],
+["02/03/2015","Payday Mountain Rooms",-80],
+["02/03/2015","Beer Skiworld Lodge",5],
 ]
